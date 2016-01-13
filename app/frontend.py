@@ -19,12 +19,19 @@ frontend = Blueprint('frontend', __name__)
 # navbar has an usual amount of Link-Elements, more commonly you will have a
 # lot more View instances.
 nav.register_element('frontend_top', Navbar(
-    View('Flask-Bootstrap', '.index'),
     View('Home', '.index'),
-    View('Forms Example', '.example_form'),
-    View('Debug-Info', 'debug.debug_root'),
+    View('Biography', '.biography'),
+    View('Featured Music Works', '.featured_musics'),
+    #View('Concert Details', '.details'),
+    #View('Access', '.access'),
+    #View('Contact Us', '.contact'),
+    #View('Biography', '.example_form'),
+    #View('Flask-Bootstrap', '.index'),
+    #View('Home', '.index'),
+    #View('Forms Example', '.example_form'),
+    #View('Debug-Info', 'debug.debug_root'),
     Subgroup(
-        'Docs',
+        'Concert Details',
         Link('Flask-Bootstrap', 'http://pythonhosted.org/Flask-Bootstrap'),
         Link('Flask-AppConfig', 'https://github.com/mbr/flask-appconfig'),
         Link('Flask-Debug', 'https://github.com/mbr/flask-debug'),
@@ -36,8 +43,14 @@ nav.register_element('frontend_top', Navbar(
         Link('Javascript', 'http://getbootstrap.com/javascript/'),
         Link('Customize', 'http://getbootstrap.com/customize/'),
     ),
-    Text('Using Flask-Bootstrap {}'.format(FLASK_BOOTSTRAP_VERSION)),
+    View('Sign In', '.example_form'),
+    #Text('Using Flask-Bootstrap {}'.format(FLASK_BOOTSTRAP_VERSION)),
 ))
+
+nav.register_element('frontend_extra', Navbar(
+    View('Extra', '.index'),
+))
+
 
 
 # Our index-page just shows a quick explanation. Check out the template
@@ -45,6 +58,15 @@ nav.register_element('frontend_top', Navbar(
 @frontend.route('/')
 def index():
     return render_template('index.html')
+
+@frontend.route('/biography')
+def biography():
+    return render_template('biography.html')
+
+@frontend.route('/featured_musics')
+def featured_musics():
+    return render_template('featured_musics.html')
+
 
 
 # Shows a long signup form, demonstrating form rendering.
